@@ -1,19 +1,19 @@
 // Stabilization.cpp //
 
-#include "pch.h"
-#include <opencv2/opencv.hpp>
+//#include "pch.h"
 #include <iostream>
 #include <cassert>
 #include <cmath>
 #include <fstream>
 #include "opencv2/core.hpp"
 #include <opencv2/core/utility.hpp>
-#include "opencv2/video.hpp"
-#include "opencv2/imgproc.hpp"
-#include "opencv2/videoio.hpp"
 #include "opencv2/highgui.hpp"
-#include "opencv2/videostab.hpp"
+#include "opencv2/imgproc.hpp"
+#include <opencv2/opencv.hpp>
 #include "opencv2/opencv_modules.hpp"
+#include "opencv2/video.hpp"
+#include "opencv2/videoio.hpp"
+#include "opencv2/videostab.hpp"
 
 using namespace std;
 using namespace cv;
@@ -222,7 +222,7 @@ int main(int argc, char **argv)
 			//time updateprediction
 			X_ = X; //X_(k) = X(k-1);
 			P_ = P + Q; //P_(k) = P(k-1)+Q;
-			// measurement update£¨correction£©
+			// measurement updateÂ£Â¨correctionÂ£Â©
 			K = P_ / (P_ + R); //gain;K(k) = P_(k)/( P_(k)+R );
 			X = X_ + K * (z - X_); //z-X_ is residual,X(k) = X_(k)+K(k)*(z(k)-X_(k)); 
 			P = (Trajectory(1, 1, 1) - K)*P_; //P(k) = (1-K(k))*P_(k);
