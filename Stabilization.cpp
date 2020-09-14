@@ -79,7 +79,7 @@ struct Trajectory
 	double y;
 	double a; // angle
 };
-//
+
 int main(int argc, char **argv)
 {
 	/*if(argc < 2) {
@@ -141,7 +141,6 @@ int main(int argc, char **argv)
 	int vert_border = HORIZONTAL_BORDER_CROP * prev.rows / prev.cols; // get the aspect ratio correct
 	//VideoWriter outputVideo; 
 	//outputVideo.open("result_stab.avi" , CV_FOURCC('X','V','I','D'), 20, cvSize(cur.rows, cur.cols), true);  
-   //
 
 	int k = 1;
 	int max_frames = cap.get(CV_CAP_PROP_FRAME_COUNT);
@@ -261,13 +260,12 @@ int main(int argc, char **argv)
 		// Resize cur2 back to cur size, for better side by side comparison
 		resize(cur2, cur2, cur.size());
 
-		// Now draw the original and stablised side by side for coolness
+		// Now draw the original and stablised side by side
 		Mat canvas = Mat::zeros(cur.rows, cur.cols * 2 + 3, cur.type());
 
 		prev.copyTo(canvas(Range::all(), Range(0, cur.cols)));
 		cur2.copyTo(canvas(Range::all(), Range(cur.cols + 3, cur.cols * 2 + 3)));
 
-		// If too big to fit on the screen, then scale it down by 2, hopefully it'll fit :)
 		if (canvas.cols > 1920) {
 			resize(canvas, canvas, Size(canvas.cols / 2, canvas.rows / 2));
 		}
